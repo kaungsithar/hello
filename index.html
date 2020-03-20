@@ -5,36 +5,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-</head>
-
-<body>
-  Hi
-  <span id="psid"></span>
-</body>
-<script>
-  (function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) { return; }
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/messenger.Extensions.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'Messenger'));
-
-  window.extAsyncInit = function () {
-    updateShit();
-  };
-
-  function updateShit() {
-    MessengerExtensions.getContext('2156136094689709',
-      function success(thread_context) {
-        document.getElementById("psid").textContent = JSON.stringify(thread_context);    
-      },
-      function error(err) {
-        document.getElementById("psid").textContent = JSON.stringify(err);
+  <style>
+    .pulse{
+      animation: pulse .3s ease-in-out;
+    }
+    @keyframes pulse {
+      40%{
+        transform: scale(1.3);
       }
-    );
-    
-  }
-</script>
+      100%{
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body style="display: flex; height: 100vh; align-items: center; justify-content: center;">
+  <img id="heart" src="https://image.flaticon.com/icons/svg/2659/2659980.svg" style="width: 100px; height: 100px;" />
+  <span id="spantime"></span>
+</body>
 
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="./jquery.signalR-2.3.0.min.js"></script>
+<script src="https://smmtestapi.azurewebsites.net/signalr/hubs"></script>
+<script src="./signalR.js"></script>
+<script>
+  let time = 0;
+  setTimeout(() => {
+    time+=2;
+  }, 2000);
+
+  setTimeout(() => {
+    if(time > 20000){
+      $("#spantime").text(time);
+    }
+
+  }, 5000);
+  function pulse(){
+    time = 0;
+
+    $("#heart").addClass("pulse");
+      setTimeout(() => {
+        $("#heart").removeClass("pulse");
+      }, 1000);
+  }
+
+  
+</script>
 </html>
