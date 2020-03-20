@@ -1,4 +1,4 @@
-$.connection.hub.url = "https://smmbmwapi.azurewebsites.net/signalr";
+$.connection.hub.url = "https://smmtestapi.azurewebsites.net/signalr";
 //$.connection.hub.url = "http://localhost:2000/signalr";
 // let user = JSON.parse(atob(localStorage.token));
 var hub = $.connection.chatHub;
